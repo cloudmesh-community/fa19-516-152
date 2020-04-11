@@ -1,5 +1,5 @@
 
-from cloudmesh.storage.StorageNewABC import StorageABC
+from cloudmesh.storage.StorageABC import StorageABC
 from cloudmesh.configuration.Config import Config
 #from cloudmesh.storage.provider.gdrive.Provider import Provider as GProv
 from cloudmesh.storage.provider.awss3.Provider import Provider as AWS_Provider
