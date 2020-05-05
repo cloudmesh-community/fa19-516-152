@@ -1,9 +1,10 @@
 # Cloudmesh Storage Provider for Virtual Directories between  AWS and Google
 
-Pratibha Madharapakkam Pagadala |  [fa19-516-152](https://github.com/cloudmesh-community/fa19-516-152)
+Pratibha Pagadala |  [fa19-516-152](https://github.com/cloudmesh-community/fa19-516-152)
 
-
-[Project Code](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/project_code)  |  [Project Report](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/report.md) | [Contributors](https://github.com/cloudmesh-community/fa19-516-152/graphs/contributors)
+Project Code: 
+[cloudmesh-storage](https://github.com/prati-mp/cloudmesh-storage) ,
+[cloudmesh-google](https://github.com/prati-mp/cloudmesh-google)
 
 ## Introduction
 
@@ -27,16 +28,15 @@ created.
 
 ![Architecture](images/architecture2.png)
 
-Description
+##### Description
 
 * Client intiates a cms storage_switch command with options such as
  
-  1. Recursive file copy from source to target
+  1. File and directories copy from source to target
   2. List the files
-  3. Add the files
-  4. delete the files
+  3. delete the files
   
-* Cloudmesh storage_switch command will run on the local server.
+* Cloudmesh storage copy command will run on the local server.
   According to the options and arguments, this would delegate the
   functions between AWS and Google Cloud.
 
@@ -44,37 +44,55 @@ Description
 
 ## Technology Used
 
-* cloudmesh-storage
 * Python
 * REST
 * AWS S3 Storage
-* Google Drive Storage
+* Google Cloud Storage
 * OpenAPI
+* cloudmesh
 
-## Implementation Plan
+## Implementation
+
+Storage copy function will allow to copy files between AWS S3 and Google storage buckets. 
+
+**Pre-Requistes**
+* Create a AWS Cloud Account, project and bucket 
+* Create a Google Storage cloud account and bucket.
+
+Account creation instructions are available in cloudmesh-manual:
+
+[AWS Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/aws.html) | 
+[Google Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/google/account.html)
+
+**Installation:**
+* Install Python 3.8 version
+* Install cloudmesh-installer and following cloudmesh bundles - cloud, storage, google.
+Refer to cloudmesh manual for installation steps: [cloudmesh installer installation](https://cloudmesh.github.io/cloudmesh-manual/installation/install-dev.html)
+
+* Update account information in cloudmesh.yaml as instruction. Refer to cloudmesh manual for information: [yaml configuration steps](https://cloudmesh.github.io/cloudmesh-manual/configuration/configuration.html?highlight=cloudmesh%20yaml)
+
+**Usage:**
 
 ````
 Usage:
 
-    storage_service copy --source=SOURCE:SOURCE_FILE_DIR 
-                         --target=TARGET:TARGET_FILE_DIR
-    storage_service list --source=SOURCE:SOURCE_FILE_DIR
-    storage_service delete --source=SOURCE:SOURCE_FILE_DIR
-
-
+    storage copy --source=SOURCE:SOURCE_FILE_DIR --target=TARGET:TARGET_FILE_DIR
+    storage list [SOURCE:SOURCE_FILE_DIR] 
+    storage delete SOURCE:SOURCE_FILE_DIR 
+    
 Arguments:
  SOURCE:SOURCE_FILE_DIR   source provider name : file or 
                           directory name
  TARGET:SOURCE_FILE_DIR   destination provider name
 
 Options:
- --source=SOURCE:SOURCE_FILE_DIR      specify the cloud:location
- --target=TARGET:LOCATION      specify the target:location
+ --source=SOURCE:SOURCE_FILE_DIR     specify the cloud:location
+ --target=TARGET:LOCATION            specify the target:location
 
 Description:
 
 Command enables to Copy files between different cloud service providers,
-list and delete them. This command accepts "aws" , "google" and "local"
+list and delete them. This command accepts "aws" , "google" 
 as the SOURCE and TARGET provider
 
 cms storage_service copy --source=SOURCE:SOURCE_FILE_DIR 
@@ -83,88 +101,53 @@ cms storage_service copy --source=SOURCE:SOURCE_FILE_DIR
  Command copies files or directories from Source provider to Target
  Provider.
 
-cms storage_service list --source=SOURCE:SOURCE_FILE_DIR
+cms storage_service list SOURCE:SOURCE_FILE_DIR
 
  Command lists all the files present in SOURCE provider's in the given
  SOURCE_FILE_DIR location This command accepts "aws" or "google" as the
  SOURCE provider
 
-cms storage_service delete --source=SOURCE:SOURCE_FILE_DIR
+cms storage_service delete SOURCE:SOURCE_FILE_DIR
 
  Command deletes the file or directory from the SOURCE provider's
  SOURCE_FILE_DIR location
 
 Example:
 
-cms storage_service copy --source=local:test1.txt 
+cms storage_service copy --source=google:test1.txt 
                          --target=aws:uploadtest1.txt
-cms storage_service list --source=google:test
-cms storage_service delete --source=aws:uploadtest1.txt
+cms storage_service list google:test
+cms storage_service delete aws:uploadtest1.txt
 
 ````
 ## Dependencies / Constraints
 
-* storage service command utiltizes cloudmesh awss3's Provider class for
-  list, put, get and delete methods.
-* Google Cloud Provider is developed using google's Storage API. 
-* The command has been tested on Windows 10.
+* Copy service downloading the files from Source cloud to local file system and uploads the files to target cloud.
+* Local Temp directory must be created in the path ~.cloudmesh/storage/tmp
 
 ## Testing
 
-PyTest have been executed to test the functionality - [Code](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/project_code/cloudmesh-storage_service/cloudmesh/storage_service/test/Test_storage_service.py)
+PyTest have been executed to test the functionality -
+ 
+ [Test Script](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/testResults.txt)
 
 ```
-pytest -v --capture=no \
-       -W ignore::DeprecationWarning\
-       /test/Test_storage_service.py > testResults.txt 
+pytest -v --capture=no -W ignore::DeprecationWarning 
+        tests/copy/Test_storage_service.py >  tests/copy/testResults.txt
 ```
 ## Benchmarks
 
-Benchmarks results - [storage_service benchmarks](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/project_code/cloudmesh-storage_service/cloudmesh/storage_service/test/testResults.txt)
+Benchmarks results - [storage copy_benchmarks](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/testResults.txt)
 
 ```
-+-------------------+-----------------------------------------------------------------------------------+
-| Machine Attribute | Value                                                                             |
-+-------------------+-----------------------------------------------------------------------------------+
-| cpu_count         | 4                                                                                 |
-| mac_version       |                                                                                   |
-| machine           | ('AMD64',)                                                                        |
-| mem_available     | 3.4 GiB                                                                           |
-| mem_free          | 3.4 GiB                                                                           |
-| mem_percent       | 56.8%                                                                             |
-| mem_total         | 7.9 GiB                                                                           |
-| mem_used          | 4.5 GiB                                                                           |
-| node              | ('PratiSree',)                                                                    |
-| platform          | Windows-10-10.0.18362-SP0                                                         |
-| processor         | ('Intel64 Family 6 Model 69 Stepping 1, GenuineIntel',)                           |
-| processors        | Windows                                                                           |
-| python            | 3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)] |
-| release           | ('10',)                                                                           |
-| sys               | win32                                                                             |
-| system            | Windows                                                                           |
-| user              |                                                                                   |
-| version           | 10.0.18362                                                                        |
-| win_version       | ('10', '10.0.18362', 'SP0', '')                                                   |
-+-------------------+-----------------------------------------------------------------------------------+
-```
-
-```
-+------------------+-------+
-| timer            | time  |
-+------------------+-------+
-| LIST AWS         | 2.735 |
-| LIST GOOGLE      | 0.475 |
-| LOCAL_TO_AWS_DIR | 1.238 |
-| AWS_TO_LOCAL_DIR | 0.694 |
-| AWS_TO_LOCAL     | 1.582 |
-| LOCAL_TO_AWS     | 0.819 |
-| AWS_TO_GOOGLE    | 3.069 |
-| GOOGLE_TO_LOCAL  | 0.667 |
-| LOCAL_TO_GOOGLE  | 0.588 |
-| GOOGLE_TO_AWS    | 2.16  |
-| DELETE GOOGLE    | 0.544 |
-| DELETE AWS       | 1.338 |
-+------------------+-------+
++-------------------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------+
+| Name                                      | Status   |   Time | Start               | tag   | Node      | User     | OS      | Version                         |
+|-------------------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------|
+| Test_storage_service/test_awstogoogle     | ok       | 19.109 | 2020-04-30 17:43:28 | copy  | PratiSree | Pratibha | Windows | ('10', '10.0.18362', 'SP0', '') |
+| Test_storage_service/test_googletoaws     | ok       | 13.236 | 2020-04-30 17:43:47 | copy  | PratiSree | Pratibha | Windows | ('10', '10.0.18362', 'SP0', '') |
+| Test_storage_service/test_googletoawsDir  | ok       | 14.817 | 2020-04-30 17:44:00 | copy  | PratiSree | Pratibha | Windows | ('10', '10.0.18362', 'SP0', '') |
+| Test_storage_service/test_googletoawsDir2 | ok       | 12.694 | 2020-04-30 17:44:15 | copy  | PratiSree | Pratibha | Windows | ('10', '10.0.18362', 'SP0', '') |
++-------------------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------+
 ```
 
 ## References
