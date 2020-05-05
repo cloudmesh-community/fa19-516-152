@@ -122,7 +122,7 @@ cms storage_service delete aws:uploadtest1.txt
 ````
 ## Dependencies / Constraints
 
-* Copy service downloading the files from Source cloud to local file system and uploads the files to target cloud.
+* Copy currently downloads the source files from Source cloud to local file system and then uploads them to target cloud.
 * Local Temp directory must be created in the path ~.cloudmesh/storage/tmp
 
 ## Testing
@@ -137,7 +137,7 @@ pytest -v --capture=no -W ignore::DeprecationWarning
 ```
 ## Benchmarks
 
-Benchmarks results - [storage copy_benchmarks](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/testResults.txt)
+Benchmarks results - [storage copy benchmarks](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/testResults.txt)
 
 ```
 +-------------------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------+
