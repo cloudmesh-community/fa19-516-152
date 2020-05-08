@@ -56,7 +56,7 @@ created.
 * Copy provider includes a copy method with source, target, sourceFile and targetFile
 * Copy method will invoke the provider's get method to download files from source cloud to local temporary directory. On successful download, put method of target provider will invoked to upload files to target cloud. 
 
-**Pre-Requistes**
+## Pre-Requistes
 * Create a AWS Cloud Account, project and bucket 
 * Create a Google Storage cloud account and bucket.
 
@@ -65,20 +65,44 @@ Account creation instructions are available in cloudmesh-manual:
 [AWS Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/aws.html) | 
 [Google Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/google/account.html)
 
-**Installation:**
-* Install Python 3.8 version
-* Install cloudmesh-installer and following cloudmesh bundles - cloud, storage, google.
+## Installation:
+
+Install cloudmesh-storage and cloudmesh-google 
+
+**Users**
+
+Users can install cloudmesh-storage, cloudmesh-google using the command
+```
+pip install cloudmesh-storage
+
+pip install cloudmesh-google
+```
+
+**Developers**
+
+Using cloudmesh-installer developers can get the source code and work on it. 
+It is recommened to use a virtual environment such as ~/ENV3. 
+
+Python 3.8.2 is recommended.
+
 Refer to cloudmesh manual for installation steps: [cloudmesh installer installation](https://cloudmesh.github.io/cloudmesh-manual/installation/install-dev.html)
-``
+```
+mkdir cm
+cd cm
+pip install cloudmesh-installer -U
+cloudmesh-installer get storage
+cloudmesh-installer get google
 
-* Update account information in cloudmesh.yaml as instruction. Refer to cloudmesh manual for information: [yaml configuration steps](https://cloudmesh.github.io/cloudmesh-manual/configuration/configuration.html?highlight=cloudmesh%20yaml)
+```
 
-**Usage:**
+* Update account information in cloudmesh.yaml as required. Refer to cloudmesh manual for information: [yaml configuration steps](https://cloudmesh.github.io/cloudmesh-manual/configuration/configuration.html?highlight=cloudmesh%20yaml)
+
+### Usage
 
 ````
 Usage:
 
-    storage copy --source=SOURCE:SOURCE_FILE_DIR --target=TARGET:TARGET_FILE_DIR
+    storage cc --source=SOURCE:SOURCE_FILE_DIR --target=TARGET:TARGET_FILE_DIR
     storage list [SOURCE:SOURCE_FILE_DIR] 
     storage delete SOURCE:SOURCE_FILE_DIR 
     
@@ -136,7 +160,7 @@ PyTest have been executed to test the functionality -
 
 ```
 pytest -v --capture=no -W ignore::DeprecationWarning 
-        tests/copy/Test_storage_service.py >  tests/copy/testResults.txt
+        tests/copy/Test_storage_service.py >  testResults.txt
 ```
 ## Benchmarks
 
@@ -170,3 +194,4 @@ Benchmarks results - [storage copy benchmarks](https://github.com/cloudmesh-comm
 * <https://aws.amazon.com/s3/>
 * <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/resources.html>
 * <https://github.com/cloudmesh/cloudmesh-storage/tree/master/cloudmesh/storage>
+* <https://googleapis.dev/python/storage/latest/index.html>
