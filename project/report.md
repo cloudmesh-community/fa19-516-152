@@ -132,7 +132,7 @@ cms storage_service delete aws:uploadtest1.txt
 
 PyTest have been executed to test the functionality -
  
- [Test Script](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/cloudmesh-community/fa19-516-152/tree/master/project/bencmark/testResults.txt)
+ [Test Script](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/benchmark/testResults.txt)
 
 ```
 pytest -v --capture=no -W ignore::DeprecationWarning 
@@ -140,7 +140,7 @@ pytest -v --capture=no -W ignore::DeprecationWarning
 ```
 ## Benchmarks
 
-Benchmarks results - [storage copy benchmarks](https://github.com/cloudmesh-community/fa19-516-152/tree/master/project/bencmark/testResults.txt)
+Benchmarks results - [storage copy benchmarks](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/benchmark/testResults.txt)
 
 ```
 +--------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------+
