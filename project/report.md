@@ -152,7 +152,7 @@ cms storage delete aws:uploadtest1.txt
     * cloudmesh/storage/command/storage.py  - storage command to include new copy function.    
     * cloudmesh/storage/Provider.py - copyFiles method to invoke the copy provider class
      
-    * cloudmesh/storage/copy/Provider.py - Copy method to download file from source provider from give source location and upload file to target provider with target location. 
+    * cloudmesh/storage/copy/Provider.py - Copy method to download file from source provider from given source location and upload file to target provider in the target location. 
   
     * tests/copy/Test_storage_service.py - Pytests to validate the copy between local, aws and google. 
 
