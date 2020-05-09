@@ -1,10 +1,10 @@
-# Cloudmesh Storage Provider for Virtual Directories between  AWS and Google
+# Cloudmesh Storage Copy Provider for Virtual Directories between  AWS and Google
 
 Pratibha Pagadala |  [fa19-516-152](https://github.com/cloudmesh-community/fa19-516-152)
 
 Project Code: 
-[cloudmesh-storage](https://github.com/prati-mp/cloudmesh-storage) ,
-[cloudmesh-google](https://github.com/prati-mp/cloudmesh-google)
+[cloudmesh-storage](https://github.com/cloudmesh/cloudmesh-storage) ,
+[cloudmesh-google](https://github.com/cloudmesh/cloudmesh-google)
 
 ## Introduction
 
@@ -30,7 +30,7 @@ created.
 
 ##### Description
 
-* Client intiates a cms storage_switch command with options such as
+* Client initiates a cms storage_switch command with options such as
  
   1. File and directories copy from source to target
   2. List the files
@@ -56,7 +56,7 @@ created.
 * Copy provider includes a copy method with source, target, sourceFile and targetFile
 * Copy method will invoke the provider's get method to download files from source cloud to local temporary directory. On successful download, put method of target provider will invoked to upload files to target cloud. 
 
-## Pre-Requistes
+## Pre-Requisites
 * Create a AWS Cloud Account, project and bucket 
 * Create a Google Storage cloud account and bucket.
 
@@ -81,7 +81,7 @@ pip install cloudmesh-google
 **Developers**
 
 Using cloudmesh-installer developers can get the source code and work on it. 
-It is recommened to use a virtual environment such as ~/ENV3. 
+It is recommended to use a virtual environment such as ~/ENV3. 
 
 Python 3.8.2 is recommended.
 
@@ -145,6 +145,20 @@ cms storage list google:test
 cms storage delete aws:uploadtest1.txt
 
 ````
+## Project Changes
+* cloudmesh-storage_service code was incorporated in cloudmesh-storage with a new copy/Provider.py
+* Command copy, list, delete were incorporated. Command 'copy' was replaced with 'cc' to avoid conflict with existing command name
+
+    * cloudmesh/storage/command/storage.py  - storage command to include new copy function.    
+    * cloudmesh/storage/Provider.py - copyFiles method to invoke the copy provider class
+     
+    * cloudmesh/storage/copy/Provider.py - Copy method to download file from source provider from give source location and upload file to target provider with target location. 
+  
+    * tests/copy/Test_storage_service.py - Pytests to validate the copy between local, aws and google. 
+
+* cloudmesh-google storage Provider code was updated to correct the get method
+
+    * cloudmesh/google/storage/Provider.py - get method updated to download files to destination directory Eg. a/b.txt instead of a/b.txt/b.txt
   
 ## Dependencies / Constraints
 
@@ -155,7 +169,7 @@ cms storage delete aws:uploadtest1.txt
 
 PyTest have been executed to test the functionality -
  
- [Test Script](https://github.com/prati-mp/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/benchmark/testResults.txt)
+ [Test Script](https://github.com/cloudmesh/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/prati-mp/cloudmesh-storage/blob/master/benchmark/copy_testResults.txt)
 
 ```
 pytest -v --capture=no -W ignore::DeprecationWarning 
@@ -163,7 +177,7 @@ pytest -v --capture=no -W ignore::DeprecationWarning
 ```
 ## Benchmarks
 
-Benchmarks results - [storage copy benchmarks](https://github.com/cloudmesh-community/fa19-516-152/blob/master/project/benchmark/testResults.txt)
+Benchmarks results - [storage copy benchmarks](https://github.com/prati-mp/cloudmesh-storage/blob/master/benchmark/copy_testResults.txt)
 
 ```
 +--------------------------------+----------+--------+---------------------+-------+-----------+----------+---------+---------------------------------+
