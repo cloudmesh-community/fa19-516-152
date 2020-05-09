@@ -121,29 +121,28 @@ Command enables to Copy files between different cloud service providers,
 list and delete them. This command accepts "aws" , "google" 
 as the SOURCE and TARGET provider
 
-cms storage_service copy --source=SOURCE:SOURCE_FILE_DIR 
+cms storage cc --source=SOURCE:SOURCE_FILE_DIR 
                          --target=TARGET:TARGET_FILE_DIR
  
  Command copies files or directories from Source provider to Target
  Provider.
 
-cms storage_service list SOURCE:SOURCE_FILE_DIR
+cms storage list SOURCE:SOURCE_FILE_DIR
 
  Command lists all the files present in SOURCE provider's in the given
  SOURCE_FILE_DIR location This command accepts "aws" or "google" as the
  SOURCE provider
 
-cms storage_service delete SOURCE:SOURCE_FILE_DIR
+cms storage delete SOURCE:SOURCE_FILE_DIR
 
  Command deletes the file or directory from the SOURCE provider's
  SOURCE_FILE_DIR location
 
 Example:
 
-cms storage_service copy --source=google:test1.txt 
-                         --target=aws:uploadtest1.txt
-cms storage_service list google:test
-cms storage_service delete aws:uploadtest1.txt
+cms storage cc --source=google:test1.txt --target=aws:uploadtest1.txt
+cms storage list google:test
+cms storage delete aws:uploadtest1.txt
 
 ````
   
