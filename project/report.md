@@ -62,8 +62,8 @@ created.
 
 Account creation instructions are available in cloudmesh-manual:
 
-[AWS Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/aws.html) | 
-[Google Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/google/account.html)
+* [AWS Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/aws.html) 
+* [Google Account Setup](https://cloudmesh.github.io/cloudmesh-manual/accounts/google/account.html)
 
 ## Installation:
 
@@ -72,6 +72,7 @@ Install cloudmesh-storage and cloudmesh-google
 **Users**
 
 Users can install cloudmesh-storage, cloudmesh-google using the command
+
 ```
 pip install cloudmesh-storage
 
@@ -86,6 +87,7 @@ It is recommended to use a virtual environment such as ~/ENV3.
 Python 3.8.2 is recommended.
 
 Refer to cloudmesh manual for installation steps: [cloudmesh installer installation](https://cloudmesh.github.io/cloudmesh-manual/installation/install-dev.html)
+
 ```
 mkdir cm
 cd cm
@@ -95,7 +97,9 @@ cloudmesh-installer get google
 
 ```
 
-* Update account information in cloudmesh.yaml as required. Refer to cloudmesh manual for information: [yaml configuration steps](https://cloudmesh.github.io/cloudmesh-manual/configuration/configuration.html?highlight=cloudmesh%20yaml)
+* Update account information in cloudmesh.yaml as required. 
+  Refer to cloudmesh manual for information: 
+  [yaml configuration steps](https://cloudmesh.github.io/cloudmesh-manual/configuration/configuration.html?highlight=cloudmesh%20yaml)
 
 ### Usage
 
@@ -145,7 +149,9 @@ cms storage list google:test
 cms storage delete aws:uploadtest1.txt
 
 ````
+
 ## Project Changes
+
 * cloudmesh-storage_service code was incorporated in cloudmesh-storage with a new copy/Provider.py
 * Command copy, list, delete were incorporated. Command 'copy' was replaced with 'cc' to avoid conflict with existing command name
 
@@ -168,13 +174,14 @@ cms storage delete aws:uploadtest1.txt
 ## Testing
 
 PyTest have been executed to test the functionality -
- 
- [Test Script](https://github.com/cloudmesh/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/prati-mp/cloudmesh-storage/blob/master/benchmark/copy_testResults.txt)
+
+[Test Script](https://github.com/cloudmesh/cloudmesh-storage/blob/master/tests/copy/Test_storage_service.py) | [Test Results](https://github.com/prati-mp/cloudmesh-storage/blob/master/benchmark/copy_testResults.txt)
 
 ```
 pytest -v --capture=no -W ignore::DeprecationWarning 
         tests/copy/Test_storage_service.py >  testResults.txt
 ```
+
 ## Benchmarks
 
 Benchmarks results - [storage copy benchmarks](https://github.com/prati-mp/cloudmesh-storage/blob/master/benchmark/copy_testResults.txt)
