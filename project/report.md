@@ -1,6 +1,6 @@
 # Cloudmesh Storage Copy Provider for Virtual Directories between  AWS and Google
 
-Pratibha Pagadala |  [fa19-516-152](https://github.com/cloudmesh-community/fa19-516-152)
+Pratibha Pagadala, [fa19-516-152](https://github.com/cloudmesh-community/fa19-516-152)
 
 Project Code: 
 [cloudmesh-storage](https://github.com/cloudmesh/cloudmesh-storage) ,
